@@ -6,3 +6,4 @@ for i in range(1,2*n+1,2):
 
     else:
         print(" "*(n-(i//2))+"*"+" "*(i-2)+"*")
+
