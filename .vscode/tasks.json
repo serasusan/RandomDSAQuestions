@@ -1,0 +1,38 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build",
+            "type": "shell",
+            "command": "g++",
+            "args": [
+                "-g",
+                "${file}",
+                "-o",
+                "${fileDirname}/${fileBasenameNoExtension}"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": ["$gcc"],
+            "detail": "Compile C++ files"
+        },
+        {
+            "label": "run",
+            "type": "shell",
+            "command": "${fileDirname}/${fileBasenameNoExtension}",
+            "args": [
+                "<",
+                "${fileDirname}/input.txt",
+                ">",
+                "${fileDirname}/output.txt"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "dependsOn": "build"
+        }
+    ]
+}
