@@ -1,15 +1,52 @@
-#include<stdio.h>
+#include <stdio.h>
+#include <string.h>
 
-int main(){
-    long nc = 0;
-    int c;
+int n;
 
-    while((c = getchar()) != EOF)
-    {
-        printf("Character: %c\n", c);
-        nc++;
+void closure(int state, int matrix[][n]) {
+    for (int i = 0; i < n; i++) {
+        if (matrix[state][i] == 1) {
+            printf(", q%d", i);
+            closure(i, matrix);
+        }
+    }
+}
+
+int main() {
+    FILE *INPUT = fopen("input.txt", "r");
+    if (INPUT == NULL) {
+        printf("Error opening file.\n");
+        return 1;
     }
 
-    printf("Loop ended. EOF value: %d\n", EOF);
+    char state1[3], input[3], state2[3];
+    int s1, s2;
+
+    printf("Enter the number of states: ");
+    scanf("%d", &n);
+
+    int mat[n][n];
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            mat[i][j] = 0;
+        }
+    }
+
+    while (fscanf(INPUT, "%s %s %s", state1, input, state2) != EOF) {
+        if (strcmp(input, "e") == 0) {
+            s1 = state1[1] - '0';
+            s2 = state2[1] - '0';
+            mat[s1][s2] = 1;
+        }
+    }
+    fclose(INPUT);
+
+    printf("Epsilon closures:\n");
+    for (int k = 0; k < n; k++) {
+        printf("q%d: q%d", k, k);
+        closure(k, mat);
+        printf("\n");
+    }
+
     return 0;
 }
