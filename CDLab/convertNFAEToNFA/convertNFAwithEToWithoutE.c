@@ -165,7 +165,7 @@ void findfinalstate() {
                     print_e_closure(j);
                 }
             }
-        }
+        }   
     }
     printf("\n");
 }
