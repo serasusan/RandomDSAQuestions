@@ -2,43 +2,50 @@
 #include<stdlib.h>
 #include<string.h>
 
-int n;
+int n; 
 
-void closure(int state,int m[][n]){
+void closure(int k,int mat[][n]){
     for(int i=0;i<n;i++){
-        if(m[state][i]==1){
+        if(mat[k][i]==1){
             printf(",q%d",i);
-            closure(i,m);
+            closure(i,mat);
         }
     }
 }
 
 void main(){
     int s1,s2;
-    char state1[3],state2[3],input[3];
-    FILE *INPUT = fopen("input.txt","r");
+    char st1[5],st2[5],input[5];
     printf("Enter the number of states\n");
     scanf("%d",&n);
-    int m[n][n];
+    int mat[n][n];
     for(int i=0;i<n;i++){
         for(int j=0;j<n;j++){
-            m[i][j]=0;
-        }
-    }
-    while(fscanf(INPUT,"%s %s %s",state1,input,state2)!=EOF){
-        if(strcmp(input,"e")==0){
-            s1 = state1[1] - '0';
-            s2 = state2[1] - '0';
-            m[s1][s2]=1;
+            mat[i][j]=0;
         }
     }
 
-    fclose(INPUT);
-    printf("Epsilon Closures\n");
+    FILE *INPUT = fopen("input.txt","r");
+    while(fscanf(INPUT,"%s %s %s",st1, input, st2)!=EOF){
+        if(strcmp(input,"e")==0){
+        // if(input=="e"){
+            s1 = st1[1]-'0';
+            s2 = st2[1]-'0';
+            mat[s1][s2] = 1;   
+        }
+    }
+
     for(int i=0;i<n;i++){
-        printf("\nq%d: q%d",i,i);
-        closure(i,m);
+        for(int j=0;j<n;j++){
+            printf("%d", mat[i][j]);
+        }
         printf("\n");
     }
 
+    printf("Epsilon Closures\n");
+    for(int k=0;k<n;k++){
+        printf("q%d : q%d",k,k);
+        closure(k,mat);
+        printf("\n");
+    }
 }

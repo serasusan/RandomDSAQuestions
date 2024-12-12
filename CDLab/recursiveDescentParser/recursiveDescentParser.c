@@ -180,6 +180,7 @@ void main()
     printf("\nEnter the input expression:");
     scanf("%s", ip_sym);
     printf("Expressions");
+    
     printf("\tSequence of production rules\n");
     e();
     for (i = 0; i < strlen(ip_sym); i++)
