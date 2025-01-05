@@ -1,0 +1,89 @@
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+
+#
+# Complete the 'findMaximumProfit' function below.
+#
+# The function is expected to return a LONG_INTEGER.
+# The function accepts following parameters:
+#  1. INTEGER_ARRAY category
+#  2. INTEGER_ARRAY price
+#
+from collections import defaultdict
+def findMaximumProfit(category, price):
+    # Write your code here
+    
+    # Find all possible ways : Recursion
+    # f(ind,category,price,hashmap,total):
+        # base case 
+        # if ind == len(price):
+            # return total
+        # we need a count  to see how many categories are there before our current ind
+        # we'll loop through the hashmap till the index matches our category number and if it is marked 1, then we'll increment the count
+        # To mark the current element also, we'll update the hashmap[ind]=1 and also increment cnt
+    #hashmap to track category added till now
+    
+    # # We'll choose from price in increasing order
+    # # first sort
+    # for i in range(len(price)):
+    #     for j in range(i+1,len(price)-i-1):
+    #         if price[j]<price[j-1]:
+    #             temp = price[j-1]
+    #             price[j-1] = price[j]
+    #             price[j] = temp
+    #             temp = category[j-1]
+    #             category[j-1] = category[j]
+    #             category[j] = temp
+    # hashmap = defaultdict(int)
+    # tot = 0
+    # for i in range(len(price)):
+    #     cost = price[i]
+    #     cnt = 0
+    #     category_no = category[i]
+    #     for j in range(1,category_no):
+    #         if hashmap[j]==1:
+    #             print("hashmap[j]",j,":",hashmap[j])
+    #             cnt+=1
+    #             print(cnt)
+    #     cnt+=1
+    #     print(cnt,"outside")
+    #     # calculation
+    #     print("total initial ",tot)
+    #     tot = tot+(cnt*cost)
+    #     print("tot:",tot,"cnt:",cnt,"cost:",cost)
+    #     hashmap[i+1] = 1
+    # return tot
+            
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    category_count = int(input().strip())
+
+    category = []
+
+    for _ in range(category_count):
+        category_item = int(input().strip())
+        category.append(category_item)
+
+    price_count = int(input().strip())
+
+    price = []
+
+    for _ in range(price_count):
+        price_item = int(input().strip())
+        price.append(price_item)
+
+    result = findMaximumProfit(category, price)
+
+    fptr.write(str(result) + '\n')
+
+    fptr.close()
+
+
+https://www.hackerrank.com/interview/interview-preparation-kit
